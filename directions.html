@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            background-color: black;
+        }
+
+        html * {
+            background-color: transparent;
+            border-color: steelblue;
+            color: lime
+        }
+
+        form {
+            width: 300px;
+            display: grid;
+            grid-template-areas:
+                "a b"
+                "o o";
+        }
+
+        fieldset {
+            display: flex;
+            flex-direction: column;
+        }
+
+        fieldset.a {
+            grid-area: a;
+        }
+
+        fieldset.b {
+            grid-area: b;
+        }
+
+        fieldset.o {
+            grid-area: o;
+        }
+
+        input {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form oninput="result.value=checkDirection(ax.value, ay.value, bx.value, by.value)">
+        <fieldset class="a">
+            <legend>Point A</legend>
+            <label for="ax">x:</label>
+            <input type="number" id="ax" value="0" />
+            <label for="by">y:</label>
+            <input type="number" id="ay" value="0" />
+        </fieldset>
+        <fieldset class="b">
+            <legend>Point B</legend>
+            <label for="bx">x:</label>
+            <input type="number" id="bx" value="0" />
+            <label for="by">y:</label>
+            <input type="number" id="by" value="0" />
+        </fieldset>
+        <fieldset class="o">
+            <legend>Direction</legend>
+            <output name="result"></output>
+        </fieldset>
+    </form>
+
+    <script>
+        class point {
+            #x; #y;
+            constructor(x, y) {
+                this.#x = +x
+                this.#y = +y
+            }
+            get x() { return this.#x }
+            get y() { return this.#y }
+        }
+        function checkDirection(ax, ay, bx, by) {
+            const A = new point(ax, ay)
+            const B = new point(bx, by)
+            const angle = calculateAngle(A, B)
+            const result = direction(angle)
+            const step = calculateSteps(angle)
+            return `${result} (${angle}) (${step})`
+        }
+        calculateAngle = (a, b) => {
+            return Math.atan2(b.y + -a.y, b.x + -a.x) * 8 / Math.PI
+        }
+        calculateSteps = angle =>
+            Math.sign(angle) >= 0 ? Math.floor(Math.ceil(angle) / 2)
+                : Math.ceil((Math.floor(angle) + 16) / 2) % 8
+        direction = angle => {
+            if (-1 < angle && angle <= 1) { return "E" }
+            else if (1 < angle && angle <= 3) { return "NE" }
+            else if (3 < angle && angle <= 5) { return "N" }
+            else if (5 < angle && angle <= 7) { return "NW" }
+            else if (7 <= Math.abs(angle)) { return "W" }
+            else if (-7 < angle && angle <= -5) { return "SW" }
+            else if (-5 < angle && angle <= -3) { return "S" }
+            else if (-3 < angle && angle <= -1) { return "SE" }
+        }
+    </script>
+</body>
+
+</html>
