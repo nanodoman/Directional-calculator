@@ -101,7 +101,7 @@
     <script>
         plain.addEventListener("click", e => {
             bx.value = e.offsetX - plain.clientWidth / 2
-            by.value = -(e.offsetY - plain.clientHeight / 2)
+            by.value = -e.offsetY + plain.clientHeight / 2
             result.value = checkDirection(ax.value, ay.value, bx.value, by.value)
         })
         class point {
@@ -121,14 +121,12 @@
             const step = calculateSteps(angle)
             return `${result} (${angle * 22.5}) (${step})`
         }
-        calculateAngle = (a, b) => {
-            return Math.atan2(b.y + -a.y, b.x + -a.x) * 8 / Math.PI
-        }
+        calculateAngle = (A, B) => Math.atan2(B.y + -A.y, B.x + -A.x) * 8 / Math.PI
         calculateSteps = angle =>
             Math.sign(angle) >= 0 ? Math.floor(Math.ceil(angle) / 2)
                 : Math.ceil((Math.floor(angle) + 16) / 2) % 8
         direction = angle => {
-            if (-1 < angle && angle <= 1) { return "E" }
+            if (Math.abs(angle) <= 1) { return "E" }
             else if (1 < angle && angle <= 3) { return "NE" }
             else if (3 < angle && angle <= 5) { return "N" }
             else if (5 < angle && angle <= 7) { return "NW" }
