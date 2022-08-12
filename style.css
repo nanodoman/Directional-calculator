@@ -1,0 +1,70 @@
+html {
+    background-color: black;
+    user-select: none;
+}
+
+html * {
+    background-color: transparent;
+    border-color: steelblue;
+    color: lime
+}
+
+form {
+    display: grid;
+    margin: auto;
+    width: fit-content;
+    grid-template-areas:
+        "a p p"
+        "b p p"
+        "o o o";
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset.a {
+    grid-area: a;
+}
+
+fieldset.b {
+    grid-area: b;
+}
+
+fieldset.o {
+    grid-area: o;
+}
+
+.plain {
+    grid-area: p;
+}
+
+#plain {
+    cursor: none !important;
+    position: relative;
+    box-sizing: content-box;
+    width: 200px;
+    height: 200px;
+    aspect-ratio: 1;
+    border: 1px solid orange;
+    background:
+        linear-gradient(to bottom, transparent calc(50% - 1px), lime, transparent 50%),
+        linear-gradient(to right, transparent calc(50% - 1px), lime, transparent 50%);
+}
+
+input {
+    width: 100px;
+    outline: none;
+}
+
+output:empty::after {
+    content: 'Output';
+    opacity: 0.4;
+}
+
+.overlay {
+    font-size: 10px;
+    position: absolute;
+    pointer-events: none
+}

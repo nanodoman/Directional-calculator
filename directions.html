@@ -6,73 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        html {
-            background-color: black;
-            user-select: none;
-        }
-
-        html * {
-            background-color: transparent;
-            border-color: steelblue;
-            color: lime
-        }
-
-        form {
-            display: grid;
-            margin: auto;
-            width: fit-content;
-            grid-template-areas:
-                "a p p"
-                "b p p"
-                "o o o";
-        }
-
-        fieldset {
-            display: flex;
-            flex-direction: column;
-        }
-
-        fieldset.a {
-            grid-area: a;
-        }
-
-        fieldset.b {
-            grid-area: b;
-        }
-
-        fieldset.o {
-            grid-area: o;
-        }
-
-        .plain {
-            grid-area: p;
-        }
-
-        #plain {
-            box-sizing: border-box;
-            width: 200px;
-            aspect-ratio: 1;
-            border: 1px solid orange;
-            background:
-                linear-gradient(to bottom, transparent calc(50% - 1px), lime, transparent 50%),
-                linear-gradient(to right, transparent calc(50% - 1px), lime, transparent 50%);
-        }
-
-        input {
-            width: 100px;
-            outline: none;
-        }
-
-        output:empty::after {
-            content: 'Output';
-            opacity: 0.4;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
 </head>
 
 <body>
-    <form oninput="result.value=checkDirection(ax.value, ay.value, bx.value, by.value)">
+    <form oninput="">
         <fieldset class="a">
             <legend>Point A</legend>
             <label for="ax">x:</label>
@@ -89,7 +28,9 @@
         </fieldset>
         <fieldset class="plain">
             <legend>Plain</legend>
-            <div id="plain"></div>
+            <div id="plain">
+                <div id="pointB" class="overlay"></div>
+            </div>
         </fieldset>
         <fieldset class="o">
             <legend>Direction</legend>
@@ -102,39 +43,13 @@
         plain.addEventListener("click", e => {
             bx.value = e.offsetX - plain.clientWidth / 2
             by.value = -e.offsetY + plain.clientHeight / 2
-            result.value = checkDirection(ax.value, ay.value, bx.value, by.value)
+            const A = new Point(ax.value, ay.value)
+            const B = new Point(bx.value, by.value)
+            result.value = A.Rotation(B)
+            document.querySelector("#pointB").style.top = e.offsetY + (by.value > 0 ? 0 : -10) + 'px'
+            document.querySelector("#pointB").style.left = e.offsetX + (bx.value > 0 ? -32 : 16) + 'px'
+            document.querySelector("#pointB").innerText = `[${bx.value},${by.value}]`
         })
-        class point {
-            #x; #y;
-            constructor(x, y) {
-                this.#x = +x
-                this.#y = +y
-            }
-            get x() { return this.#x }
-            get y() { return this.#y }
-        }
-        function checkDirection(ax, ay, bx, by) {
-            const A = new point(ax, ay)
-            const B = new point(bx, by)
-            const angle = calculateAngle(A, B)
-            const result = direction(angle)
-            const step = calculateSteps(angle)
-            return `${result} (${angle * 22.5}) (${step})`
-        }
-        calculateAngle = (A, B) => Math.atan2(B.y + -A.y, B.x + -A.x) * 8 / Math.PI
-        calculateSteps = angle =>
-            Math.sign(angle) >= 0 ? Math.floor(Math.ceil(angle) / 2)
-                : Math.ceil((Math.floor(angle) + 16) / 2) % 8
-        direction = angle => {
-            if (Math.abs(angle) <= 1) { return "E" }
-            else if (1 < angle && angle <= 3) { return "NE" }
-            else if (3 < angle && angle <= 5) { return "N" }
-            else if (5 < angle && angle <= 7) { return "NW" }
-            else if (7 <= Math.abs(angle)) { return "W" }
-            else if (-7 < angle && angle <= -5) { return "SW" }
-            else if (-5 < angle && angle <= -3) { return "S" }
-            else if (-3 < angle && angle <= -1) { return "SE" }
-        }
     </script>
 </body>
 
