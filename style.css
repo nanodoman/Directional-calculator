@@ -1,12 +1,32 @@
-html {
+:root {
+    --color1: hsl(120, 100%, 50%);
+    --color2: hsl(33, 100%, 50%);
+    --color3: hsl(207 44% 49%);
+    --color4: hsl(208 44% 20%);
+    --color5: hsl(330, 100%, 71%);
+    --color6: hsl(295, 45%, 44%);
+
     background-color: black;
     user-select: none;
+    border-color: var(--color3);
+    color: var(--color1)
 }
 
-html * {
-    background-color: transparent;
-    border-color: steelblue;
-    color: lime
+* {
+    border-color: inherit;
+    color: inherit;
+}
+
+input {
+    background-color: var(--color4);
+}
+
+button {
+    background-color: var(--color4);
+}
+
+dt {
+    text-decoration: underline;
 }
 
 form {
@@ -41,16 +61,10 @@ fieldset.o {
 }
 
 #plain {
-    /* cursor: none !important; */
-    /* position: relative; */
-    /* box-sizing: content-box; */
     width: 200px;
     height: 200px;
     aspect-ratio: 1;
-    /* border: 1px solid orange; */
-    /* background:
-        linear-gradient(to bottom, transparent calc(50% - 1px), lime, transparent 50%),
-        linear-gradient(to right, transparent calc(50% - 1px), lime, transparent 50%); */
+    background-color: var(--color4);
 }
 
 input {
@@ -61,10 +75,4 @@ input {
 output:empty::after {
     content: 'Output';
     opacity: 0.4;
-}
-
-.overlay {
-    font-size: 10px;
-    position: absolute;
-    pointer-events: none
 }
