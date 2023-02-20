@@ -54,10 +54,10 @@
 
         function inputSetPoint(ax, ay, bx, by) {
             document.querySelector("#pointA").cx.baseVal.value = +ax + plain.clientWidth / 2
-            document.querySelector("#pointA").cy.baseVal.value = -ay + plain.clientWidth / 2
+            document.querySelector("#pointA").cy.baseVal.value = +ay + plain.clientWidth / 2
 
             document.querySelector("#pointB").cx.baseVal.value = +bx + plain.clientWidth / 2
-            document.querySelector("#pointB").cy.baseVal.value = -by + plain.clientWidth / 2
+            document.querySelector("#pointB").cy.baseVal.value = +by + plain.clientWidth / 2
             calculate()
         }
 
@@ -65,10 +65,10 @@
             const point = e.shiftKey ? document.querySelector("#pointB") : document.querySelector("#pointA")
             const inputX = e.shiftKey ? bx : ax
             const inputY = e.shiftKey ? by : ay
-            point.cx.baseVal.value = e.offsetX
-            point.cy.baseVal.value = e.offsetY
+            point.x.baseVal.value = e.offsetX
+            point.y.baseVal.value = e.offsetY
             inputX.value = e.offsetX - plain.clientWidth / 2
-            inputY.value = -e.offsetY + plain.clientHeight / 2
+            inputY.value = e.offsetY - plain.clientHeight / 2
             calculate()
         }
 
