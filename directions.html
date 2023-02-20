@@ -5,31 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>2-points plain</title>
     <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
 </head>
 
 <body>
-    <form oninput="inputSetPoint(ax.value,ay.value,bx.value,by.value)">
+    <form oninput="inputPoint(ax.value,ay.value,bx.value,by.value)">
         <fieldset class="a">
             <legend>Point A</legend>
             <label for="ax">x:</label>
-            <input type="number" id="ax" value="0" />
+            <input type="number" id="ax" value="0" min="-100" max="100" />
             <label for="ay">y:</label>
-            <input type="number" id="ay" value="0" />
+            <input type="number" id="ay" value="0" min="-100" max="100" />
         </fieldset>
         <fieldset class="b">
             <legend>Point B</legend>
             <label for="bx">x:</label>
-            <input type="number" id="bx" value="0" />
+            <input type="number" id="bx" value="0" min="-100" max="100" />
             <label for="by">y:</label>
-            <input type="number" id="by" value="0" />
+            <input type="number" id="by" value="0" min="-100" max="100" />
         </fieldset>
-        <fieldset class="plain">
+        <fieldset class="p">
             <legend>Plain</legend>
 
-            <svg id="plain" viewBox="0 0 200 200" onclick="clickSetPoint(event)">
+            <svg id="plain" viewBox="0 0 200 200" onclick="clickPoint(event)">
                 <defs>
                     <circle id="point" r="5" stroke="black" stroke-width="0.5" />
                     <marker
@@ -50,61 +50,46 @@
                         markerWidth="6"
                         markerHeight="6"
                         orient="auto-start-reverse">
-                        <line x1="5" y1="0" x2="5" y2="10" stroke="var(--color1)" stroke-width="2" />
+                        <line x1="5" y1="0" x2="5" y2="10" stroke="var(--color1)" />
                     </marker>
                 </defs>
-                <polyline id="axisX" points="0,100 25,100 50,100 75,100 125,100 150,100 175,100 200,100" stroke="var(--color1)" marker-mid="url(#bar)" marker-end="url(#arrow)" />
-                <polyline id="axisY" points="100,0 100,25 100,50 100,75 100,125 100,150 100,175 100,200" stroke="var(--color1)" marker-mid="url(#bar)" marker-end="url(#arrow)" />
+                <polyline id="axisX"
+                    points="0,100 25,100 50,100 75,100 125,100 150,100 175,100 200,100"
+                    stroke="var(--color1)"
+                    marker-mid="url(#bar)"
+                    marker-end="url(#arrow)" />
+                <polyline id="axisY"
+                    points="100,0 100,25 100,50 100,75 100,125 100,150 100,175 100,200"
+                    stroke="var(--color1)"
+                    marker-mid="url(#bar)"
+                    marker-end="url(#arrow)" />
                 <text x="105" y="95" font-size="10" fill="var(--color1)">0,0</text>
                 <text x="190" y="90" font-size="8" fill="var(--color1)">X</text>
                 <text x="110" y="195" font-size="8" fill="var(--color1)">Y</text>
-                <polygon id="border" points="0,0 200,0 200,200 0,200" fill="none" stroke="var(--color2)" stroke-width="2" />
                 <use id="pointA" href="#point" x="100" y="100" fill="var(--color5)" />
                 <use id="pointB" href="#point" x="100" y="100" fill="var(--color6)" />
+                <polygon id="border"
+                    points="0,0 200,0 200,200 0,200"
+                    fill="none"
+                    stroke="var(--color2)"
+                    stroke-width="2" />
             </svg>
 
         </fieldset>
+
         <fieldset class="o">
             <legend>Calculations</legend>
+
             <dl>
-                <dt>Rotation:</dt>
+                <dt>Rotation</dt>
                 <dd><output id="rotation"></output></dd>
-                <dt>Distance:</dt>
+                <dt>Distance</dt>
                 <dd><output id="distance"></output></dd>
             </dl>
-            <button type="reset" onclick="inputSetPoint(0,0,0,0)">Reset</button>
+
+            <button type="reset" onclick="inputPoint(0,0,0,0)">Reset</button>
         </fieldset>
     </form>
-
-    <script>
-
-        function inputSetPoint(ax, ay, bx, by) {
-            document.querySelector("#pointA").x.baseVal.value = +ax + plain.clientWidth / 2
-            document.querySelector("#pointA").y.baseVal.value = +ay + plain.clientWidth / 2
-
-            document.querySelector("#pointB").x.baseVal.value = +bx + plain.clientWidth / 2
-            document.querySelector("#pointB").y.baseVal.value = +by + plain.clientWidth / 2
-            calculate()
-        }
-
-        function clickSetPoint(e) {
-            const point = e.shiftKey ? document.querySelector("#pointB") : document.querySelector("#pointA")
-            const inputX = e.shiftKey ? bx : ax
-            const inputY = e.shiftKey ? by : ay
-            point.x.baseVal.value = e.offsetX
-            point.y.baseVal.value = e.offsetY
-            inputX.value = e.offsetX - plain.clientWidth / 2
-            inputY.value = e.offsetY - plain.clientHeight / 2
-            calculate()
-        }
-
-        function calculate() {
-            const A = new Point(ax.value, ay.value)
-            const B = new Point(bx.value, by.value)
-            rotation.value = A.Rotation(B)
-            distance.value = A.Distance(B)
-        }
-    </script>
 </body>
 
 </html>

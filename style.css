@@ -17,18 +17,6 @@
     color: inherit;
 }
 
-input {
-    background-color: var(--color4);
-}
-
-button {
-    background-color: var(--color4);
-}
-
-dt {
-    text-decoration: underline;
-}
-
 form {
     display: grid;
     margin: auto;
@@ -56,7 +44,7 @@ fieldset.o {
     grid-area: o;
 }
 
-.plain {
+fieldset.p {
     grid-area: p;
 }
 
@@ -69,7 +57,15 @@ fieldset.o {
 
 input {
     width: 100px;
-    outline: none;
+}
+
+input,
+button {
+    background-color: var(--color4);
+}
+
+dt {
+    text-decoration: underline;
 }
 
 output:empty::after {
