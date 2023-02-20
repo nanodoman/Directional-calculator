@@ -56,17 +56,66 @@ fieldset.p {
 }
 
 input {
-    width: 100px;
+    /* width: 100px; */
 }
+
+input[type="range"] {
+    /* width: 100px; */
+}
+
+input[type="range"][reversed] {
+
+    rotate: 180deg;
+}
+
+input[type="range"][vertical] {
+    /* width: 1rem; */
+    appearance: slider-vertical;
+}
+
+.sliders input[type="range"][vertical] {
+    height: 100%;
+
+}
+
 
 input,
 button {
     background-color: var(--color4);
 }
 
+fieldset.a input[type=range] {
+    accent-color: var(--color5);
+}
+
 dt {
     text-decoration: underline;
 }
+
+.sliders {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1rem 100px;
+    grid-template-rows: 1rem 100px;
+    grid-template-areas:
+        "blank slider-x"
+        "slider-y pos-details";
+}
+
+.slider-x {
+    grid-area: slider-x;
+}
+
+.slider-y {
+    grid-area: slider-y;
+}
+
+.pos-details {
+    grid-area: pos-details;
+    /* padding: 1em; */
+}
+
+
 
 output:empty::after {
     content: 'Output';
