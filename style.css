@@ -41,16 +41,16 @@ fieldset.o {
 }
 
 #plain {
-    cursor: none !important;
-    position: relative;
-    box-sizing: content-box;
+    /* cursor: none !important; */
+    /* position: relative; */
+    /* box-sizing: content-box; */
     width: 200px;
     height: 200px;
     aspect-ratio: 1;
-    border: 1px solid orange;
-    background:
+    /* border: 1px solid orange; */
+    /* background:
         linear-gradient(to bottom, transparent calc(50% - 1px), lime, transparent 50%),
-        linear-gradient(to right, transparent calc(50% - 1px), lime, transparent 50%);
+        linear-gradient(to right, transparent calc(50% - 1px), lime, transparent 50%); */
 }
 
 input {

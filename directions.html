@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <form oninput="">
+    <form oninput="inputSetPoint(ax.value,ay.value,bx.value,by.value)">
         <fieldset class="a">
             <legend>Point A</legend>
             <label for="ax">x:</label>
@@ -28,28 +28,63 @@
         </fieldset>
         <fieldset class="plain">
             <legend>Plain</legend>
-            <div id="plain">
-                <div id="pointB" class="overlay"></div>
-            </div>
+
+            <svg id="plain" viewBox="0 0 200 200" onclick="clickSetPoint(event)">
+                <line x1="100" y1="0" x2="100" y2="200" stroke="lime" />
+                <line x1="0" y1="100" x2="200" y2="100" stroke="lime" />
+                <polygon points="0,0 200,0 200,200 0,200" fill="none" stroke="orange" stroke-width="2" />
+                <circle id="pointA" cx="100" cy="100" r="3" fill="darkseagreen" />
+                <circle id="pointB" cx="100" cy="100" r="3" fill="lightseagreen" />
+            </svg>
+
         </fieldset>
         <fieldset class="o">
             <legend>Direction</legend>
             <output id="result" name="result"></output>
-            <button type="reset">Reset</button>
+            <button type="reset" onclick="inputSetPoint(0,0,0,0)">Reset</button>
         </fieldset>
     </form>
 
     <script>
-        plain.addEventListener("click", e => {
-            bx.value = e.offsetX - plain.clientWidth / 2
-            by.value = -e.offsetY + plain.clientHeight / 2
+        // plain.addEventListener("click", e => {
+        //     bx.value = e.offsetX - plain.clientWidth / 2
+        //     by.value = -e.offsetY + plain.clientHeight / 2
+        //     const A = new Point(ax.value, ay.value)
+        //     const B = new Point(bx.value, by.value)
+        //     result.value = A.Rotation(B)
+        //     // document.querySelector("#pointB").style.top = e.offsetY + (by.value > 0 ? 0 : -10) + 'px'
+        //     // document.querySelector("#pointB").style.left = e.offsetX + (bx.value > 0 ? -32 : 16) + 'px'
+        //     // document.querySelector("#pointB").innerText = `[${bx.value},${by.value}]`
+
+        //     document.querySelector("#pointA").cx.baseVal.value = e.offsetX
+        //     document.querySelector("#pointA").cy.baseVal.value = e.offsetY
+        // })
+
+        function inputSetPoint(ax, ay, bx, by) {
+            document.querySelector("#pointA").cx.baseVal.value = +ax + plain.clientWidth / 2
+            document.querySelector("#pointA").cy.baseVal.value = -ay + plain.clientWidth / 2
+
+            document.querySelector("#pointB").cx.baseVal.value = +bx + plain.clientWidth / 2
+            document.querySelector("#pointB").cy.baseVal.value = -by + plain.clientWidth / 2
+            calculate()
+        }
+
+        function clickSetPoint(e) {
+            const point = e.shiftKey ? document.querySelector("#pointB") : document.querySelector("#pointA")
+            const inputX = e.shiftKey ? bx : ax
+            const inputY = e.shiftKey ? by : ay
+            point.cx.baseVal.value = e.offsetX
+            point.cy.baseVal.value = e.offsetY
+            inputX.value = e.offsetX - plain.clientWidth / 2
+            inputY.value = -e.offsetY + plain.clientHeight / 2
+            calculate()
+        }
+
+        function calculate() {
             const A = new Point(ax.value, ay.value)
             const B = new Point(bx.value, by.value)
             result.value = A.Rotation(B)
-            document.querySelector("#pointB").style.top = e.offsetY + (by.value > 0 ? 0 : -10) + 'px'
-            document.querySelector("#pointB").style.left = e.offsetX + (bx.value > 0 ? -32 : 16) + 'px'
-            document.querySelector("#pointB").innerText = `[${bx.value},${by.value}]`
-        })
+        }
     </script>
 </body>
 
