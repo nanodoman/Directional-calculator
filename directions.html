@@ -39,26 +39,18 @@
 
         </fieldset>
         <fieldset class="o">
-            <legend>Direction</legend>
-            <output id="result" name="result"></output>
+            <legend>Calculations</legend>
+            <dl>
+                <dt>Rotation:</dt>
+                <dd><output id="rotation"></output></dd>
+                <dt>Distance:</dt>
+                <dd><output id="distance"></output></dd>
+            </dl>
             <button type="reset" onclick="inputSetPoint(0,0,0,0)">Reset</button>
         </fieldset>
     </form>
 
     <script>
-        // plain.addEventListener("click", e => {
-        //     bx.value = e.offsetX - plain.clientWidth / 2
-        //     by.value = -e.offsetY + plain.clientHeight / 2
-        //     const A = new Point(ax.value, ay.value)
-        //     const B = new Point(bx.value, by.value)
-        //     result.value = A.Rotation(B)
-        //     // document.querySelector("#pointB").style.top = e.offsetY + (by.value > 0 ? 0 : -10) + 'px'
-        //     // document.querySelector("#pointB").style.left = e.offsetX + (bx.value > 0 ? -32 : 16) + 'px'
-        //     // document.querySelector("#pointB").innerText = `[${bx.value},${by.value}]`
-
-        //     document.querySelector("#pointA").cx.baseVal.value = e.offsetX
-        //     document.querySelector("#pointA").cy.baseVal.value = e.offsetY
-        // })
 
         function inputSetPoint(ax, ay, bx, by) {
             document.querySelector("#pointA").cx.baseVal.value = +ax + plain.clientWidth / 2
@@ -83,7 +75,8 @@
         function calculate() {
             const A = new Point(ax.value, ay.value)
             const B = new Point(bx.value, by.value)
-            result.value = A.Rotation(B)
+            rotation.value = A.Rotation(B)
+            distance.value = A.Distance(B)
         }
     </script>
 </body>

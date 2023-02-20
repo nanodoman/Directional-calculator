@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Creates cartesian coordinates point
  * @public
@@ -33,15 +31,3 @@ class Point {
      */
     Distance = To => Math.hypot(To.x - this.x, To.y - this.y)
 }
-
-// const A = new Point(0, 0)
-//     , B = new Point(50, 20)
-
-// console.log(A.Rotation(new Point(2, 1)))
-// console.log(A.Rotation(new Point(1, 2)))
-// console.log(A.Rotation(new Point(-1, 2)))
-// console.log(A.Rotation(new Point(-2, 1)))
-// console.log(A.Rotation(new Point(-2, -1)))
-// console.log(A.Rotation(new Point(-1, -2)))
-// console.log(A.Rotation(new Point(1, -2)))
-// console.log(A.Rotation(new Point(2, -1)))
