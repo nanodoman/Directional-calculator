@@ -30,11 +30,34 @@
             <legend>Plain</legend>
 
             <svg id="plain" viewBox="0 0 200 200" onclick="clickSetPoint(event)">
-                <line x1="100" y1="0" x2="100" y2="200" stroke="lime" />
-                <line x1="0" y1="100" x2="200" y2="100" stroke="lime" />
-                <polygon points="0,0 200,0 200,200 0,200" fill="none" stroke="orange" stroke-width="2" />
-                <circle id="pointA" cx="100" cy="100" r="3" fill="darkseagreen" />
-                <circle id="pointB" cx="100" cy="100" r="3" fill="lightseagreen" />
+                <defs>
+                    <circle id="point" r="3" />
+                    <marker
+                        id="arrow"
+                        viewBox="0 0 10 10"
+                        refX="10"
+                        refY="5"
+                        markerWidth="6"
+                        markerHeight="6"
+                        orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="lime" />
+                    </marker>
+                    <marker
+                        id="bar"
+                        viewBox="0 0 10 10"
+                        refX="5"
+                        refY="5"
+                        markerWidth="6"
+                        markerHeight="6"
+                        orient="auto-start-reverse">
+                        <line x1="5" y1="0" x2="5" y2="10" stroke="lime" stroke-width="2" />
+                    </marker>
+                </defs>
+                <polyline id="axisX" points="0,100 25,100 50,100 75,100 125,100 150,100 175,100 200,100" stroke="lime" marker-mid="url(#bar)" marker-end="url(#arrow)" />
+                <polyline id="axisY" points="100,0 100,25 100,50 100,75 100,125 100,150 100,175 100,200" stroke="lime" marker-mid="url(#bar)" marker-end="url(#arrow)" />
+                <polygon id="border" points="0,0 200,0 200,200 0,200" fill="none" stroke="orange" stroke-width="2" />
+                <use id="pointA" href="#point" x="100" y="100" fill="darkseagreen" />
+                <use id="pointB" href="#point" x="100" y="100" fill="lightseagreen" />
             </svg>
 
         </fieldset>
@@ -53,11 +76,11 @@
     <script>
 
         function inputSetPoint(ax, ay, bx, by) {
-            document.querySelector("#pointA").cx.baseVal.value = +ax + plain.clientWidth / 2
-            document.querySelector("#pointA").cy.baseVal.value = +ay + plain.clientWidth / 2
+            document.querySelector("#pointA").x.baseVal.value = +ax + plain.clientWidth / 2
+            document.querySelector("#pointA").y.baseVal.value = +ay + plain.clientWidth / 2
 
-            document.querySelector("#pointB").cx.baseVal.value = +bx + plain.clientWidth / 2
-            document.querySelector("#pointB").cy.baseVal.value = +by + plain.clientWidth / 2
+            document.querySelector("#pointB").x.baseVal.value = +bx + plain.clientWidth / 2
+            document.querySelector("#pointB").y.baseVal.value = +by + plain.clientWidth / 2
             calculate()
         }
 
