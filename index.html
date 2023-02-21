@@ -15,16 +15,16 @@
         <fieldset class="a">
             <legend>Point A</legend>
             <label for="ax">x:</label>
-            <input type="number" id="ax" value="0" min="-100" max="100" />
+            <input type="number" id="ax" data-coordinate="x" value="0" min="-100" max="100" />
             <label for="ay">y:</label>
-            <input type="number" id="ay" value="0" min="-100" max="100" />
+            <input type="number" id="ay" data-coordinate="y" value="0" min="-100" max="100" />
         </fieldset>
         <fieldset class="b">
             <legend>Point B</legend>
             <label for="bx">x:</label>
-            <input type="number" id="bx" value="0" min="-100" max="100" />
+            <input type="number" id="bx" data-coordinate="x" value="0" min="-100" max="100" />
             <label for="by">y:</label>
-            <input type="number" id="by" value="0" min="-100" max="100" />
+            <input type="number" id="by" data-coordinate="y" value="0" min="-100" max="100" />
         </fieldset>
         <fieldset class="p">
             <legend>Plain</legend>
@@ -76,20 +76,59 @@
             </svg>
 
         </fieldset>
-
-        <fieldset class="o">
+        <fieldset class="c">
             <legend>Calculations</legend>
-
             <dl>
                 <dt>Rotation</dt>
-                <dd><output id="rotation"></output></dd>
+                <dd><output id="rotation">0</output></dd>
                 <dt>Distance</dt>
-                <dd><output id="distance"></output></dd>
+                <dd><output id="distance">0</output></dd>
             </dl>
+        </fieldset>
+        <fieldset class="o">
+            <legend>Options</legend>
+            <label>
+                <input type="radio" name="Inputs" value="number" onchange="setInput(this.value)" checked>
+                Number
+            </label>
+            <label>
+                <input type="radio" name="Inputs" value="range" onchange="setInput(this.value)">
+                Range
+            </label>
+            <hr />
+            Color A
+            <input type="color" list="colors" value="#f43f5e" onchange="setColor('a', this.value)" />
+            <hr />
+            Color B
+            <input type="color" list="colors" value="#3b82f6" onchange="setColor('b', this.value)" />
+            <hr />
+            <input type="reset" value="Reset" onclick="inputPoint(0,0,0,0)"></input>
 
-            <input type="reset"  value="Reset" onclick="inputPoint(0,0,0,0)"></input>
+            <span id="ver">v2.0.0</span>
         </fieldset>
     </form>
+
+    <datalist id="colors">
+        <option value="#f43f5e"></option>
+        <option value="#ec4899"></option>
+        <option value="#d946ef"></option>
+        <option value="#a855f7"></option>
+        <option value="#8b5cf6"></option>
+        <option value="#6366f1"></option>
+        <option value="#3b82f6"></option>
+        <option value="#0ea5e9"></option>
+        <option value="#06b6d4"></option>
+        <option value="#14b8a6"></option>
+        <option value="#10b981"></option>
+        <option value="#22c55e"></option>
+        <option value="#84cc16"></option>
+        <option value="#eab308"></option>
+        <option value="#f59e0b"></option>
+        <option value="#f97316"></option>
+        <option value="#ef4444"></option>
+        <option value="#78716c"></option>
+    </datalist>
+
 </body>
 
 </html>

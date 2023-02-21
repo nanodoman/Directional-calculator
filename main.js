@@ -58,3 +58,11 @@ function calculate() {
     rotation.value = A.Rotation(B)
     distance.value = A.Distance(B)
 }
+
+function setInput(inputStyle) {
+    document.querySelectorAll("[data-coordinate]").forEach(element => element.type = inputStyle)
+}
+
+function setColor(point, color) {
+    document.body.style.setProperty(`--point-${point}`, color)
+}

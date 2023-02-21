@@ -17,8 +17,8 @@
 
     --accent: hsl(33 100% 50%);
 
-    --point-a: hsl(90 75% 50%);
-    --point-b: hsl(60 75% 50%);
+    --point-a: #f43f5e;
+    --point-b: #3b82f6;
 
     --neutral-15: hsl(0 0% 15%);
     --neutral-10: hsl(0 0% 10%);
@@ -36,17 +36,18 @@
 * {
     border-color: inherit;
     color: inherit;
-    accent-color: var(--primary);
+    accent-color: var(--accent);
 }
 
 form {
     display: grid;
     margin: 3rem auto;
     width: fit-content;
+    grid-template-columns: 128px auto auto;
     grid-template-areas:
-        "a p p"
-        "b p p"
-        "o o o";
+        "a p p o"
+        "b p p o"
+        "c c c o";
 }
 
 fieldset {
@@ -61,6 +62,7 @@ fieldset {
 
 fieldset.a {
     grid-area: a;
+    /* width: 100px; */
 }
 
 fieldset.b {
@@ -68,7 +70,12 @@ fieldset.b {
 }
 
 fieldset.o {
+    position: relative;
     grid-area: o;
+}
+
+fieldset.c {
+    grid-area: c;
 }
 
 fieldset.p {
@@ -83,7 +90,15 @@ fieldset.p {
 }
 
 input {
-    width: 100px;
+    /* width: 100px; */
+}
+
+[type=range]{
+    width: 100%;
+}
+
+input[type=radio] {
+    width: unset;
 }
 
 input:focus-within {
@@ -109,7 +124,26 @@ dt {
     text-decoration: underline;
 }
 
-output:empty::after {
-    content: 'Output';
-    opacity: 0.4;
+hr {
+    width: 100%;
+}
+
+#ax,
+#ay {
+    accent-color: var(--point-a);
+}
+
+#bx,
+#by {
+    accent-color: var(--point-b);
+}
+
+#ver {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0 0.5em;
+    font-weight: bold;
+    font-size: 0.6rem;
+    opacity: 0.6;
 }
