@@ -1,25 +1,47 @@
 :root {
-    --color1: hsl(120, 100%, 50%);
-    --color2: hsl(33, 100%, 50%);
-    --color3: hsl(207 44% 49%);
-    --color4: hsl(208 44% 20%);
-    --color5: hsl(330, 100%, 71%);
-    --color6: hsl(295, 45%, 44%);
 
-    background-color: black;
+    --primary: hsl(120 100% 50%);
+
+    --secondary: hsl(207 44% 49%);
+    --secondary-700: hsl(207 100% 69%);
+    --secondary-600: hsl(207 64% 59%);
+    --secondary-500: hsl(207 44% 49%);
+    --secondary-400: hsl(207 44% 35%);
+    --secondary-300: hsl(208 44% 28%);
+    --secondary-200: hsl(207 44% 21%);
+    --secondary-100: hsl(208 44% 14%);
+
+    --secondary-75: hsl(207 44% 49% / 0.75);
+    --secondary-50: hsl(207 44% 49% / 0.50);
+    --secondary-25: hsl(207 44% 49% / 0.25);
+
+    --accent: hsl(33 100% 50%);
+
+    --point-a: hsl(90 75% 50%);
+    --point-b: hsl(60 75% 50%);
+
+    --neutral-15: hsl(0 0% 15%);
+    --neutral-10: hsl(0 0% 10%);
+    --neutral-0: hsl(0 0% 0%);
+
+    --radius: 0.3rem;
+
     user-select: none;
-    border-color: var(--color3);
-    color: var(--color1)
+    border-color: var(--secondary);
+    font-family: "consolas", monospace;
+    color: var(--primary);
+    background-color: var(--neutral-10);
 }
 
 * {
     border-color: inherit;
     color: inherit;
+    accent-color: var(--primary);
 }
 
 form {
     display: grid;
-    margin: auto;
+    margin: 3rem auto;
     width: fit-content;
     grid-template-areas:
         "a p p"
@@ -30,6 +52,11 @@ form {
 fieldset {
     display: flex;
     flex-direction: column;
+    border-radius: var(--radius);
+    background-color: hsl(0 0% 0%);
+    box-shadow:
+        inset 0 0 0.2rem 1px var(--secondary-50),
+        0 0 1rem 0.25rem var(--secondary-25);
 }
 
 fieldset.a {
@@ -52,16 +79,30 @@ fieldset.p {
     width: 200px;
     height: 200px;
     aspect-ratio: 1;
-    background-color: var(--color4);
+    background-color: var(--secondary-25);
 }
 
 input {
     width: 100px;
 }
 
+input:focus-within {
+    border-color: var(--secondary-600);
+}
+
+input:hover {
+    border-color: var(--secondary-700);
+}
+
+input[type=number] {
+    padding-inline-start: 0.5em;
+}
+
 input,
 button {
-    background-color: var(--color4);
+    outline: none;
+    border-radius: var(--radius);
+    background-color: var(--secondary-100);
 }
 
 dt {
