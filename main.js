@@ -85,7 +85,6 @@ function mouseMove(e) {
 function resetCrossHair() {
     document.querySelector("#cursor").x.baseVal.value = 0
     document.querySelector("#cursor").y.baseVal.value = 0
-
 }
 
 function switchCrossHair(state) {
