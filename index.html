@@ -29,9 +29,10 @@
         <fieldset class="p">
             <legend>Plain</legend>
 
-            <svg id="plain" viewBox="0 0 200 200" onclick="clickPoint(event)">
+            <svg id="plain" viewBox="0 0 200 200" onmousemove="mouseMove(event)" onmouseleave="mouseMove(event)" onclick="clickPoint(event)">
                 <defs>
                     <circle id="point" r="5" stroke="var(--neutral-0)" stroke-width="0.5" />
+                    <path id="cross-hair" d="M2,0 H200 M0,2 V200 M0,-2 V-200 M-2,0 H-200" stroke="white" />
                     <marker
                         id="arrow"
                         viewBox="0 0 10 10"
@@ -68,6 +69,7 @@
                 <text x="110" y="195" font-size="8" fill="var(--primary)">Y</text>
                 <use id="pointA" href="#point" x="100" y="100" fill="var(--point-a)" />
                 <use id="pointB" href="#point" x="100" y="100" fill="var(--point-b)" />
+                <use id="cursor" href="#cross-hair" x="0" y="0" />
                 <polygon id="border"
                     points="0,0 200,0 200,200 0,200"
                     fill="none"
@@ -103,7 +105,11 @@
             <input type="color" list="colors" value="#3b82f6" onchange="setColor('b', this.value)" />
             <hr />
             <input type="reset" value="Reset" onclick="inputPoint(0,0,0,0)"></input>
-
+            <hr>
+            <label>
+                <input type="checkbox" name="Cross-hair" onchange="switchCrossHair(this.checked)">
+                Cross-hair
+            </label>
             <span id="ver">v2.0.0</span>
         </fieldset>
     </form>

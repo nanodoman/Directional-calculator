@@ -32,6 +32,8 @@ class Point {
     Distance = To => Math.hypot(To.x - this.x, To.y - this.y)
 }
 
+let crossHair = false;
+
 function inputPoint(ax, ay, bx, by) {
     document.querySelector("#pointA").x.baseVal.value = +ax + plain.clientWidth / 2
     document.querySelector("#pointA").y.baseVal.value = +ay + plain.clientWidth / 2
@@ -65,4 +67,29 @@ function setInput(inputStyle) {
 
 function setColor(point, color) {
     document.body.style.setProperty(`--point-${point}`, color)
+}
+
+function mouseMove(e) {
+    if (!crossHair) return
+    switch (e.type) {
+        case "mouseleave":
+            resetCrossHair()
+            break;
+
+        case "mousemove":
+            document.querySelector("#cursor").x.baseVal.value = e.offsetX
+            document.querySelector("#cursor").y.baseVal.value = e.offsetY
+            break;
+    }
+}
+function resetCrossHair() {
+    document.querySelector("#cursor").x.baseVal.value = 0
+    document.querySelector("#cursor").y.baseVal.value = 0
+
+}
+
+function switchCrossHair(state) {
+    if (!state) resetCrossHair()
+    crossHair = state
+    document.querySelector("#plain").classList.toggle("cross-hair")
 }

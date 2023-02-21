@@ -89,11 +89,11 @@ fieldset.p {
     background-color: var(--secondary-25);
 }
 
-input {
-    /* width: 100px; */
+#plain.cross-hair {
+    cursor: none;
 }
 
-[type=range]{
+[type=range] {
     width: 100%;
 }
 
