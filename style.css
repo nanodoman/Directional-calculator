@@ -83,6 +83,7 @@ fieldset.p {
 }
 
 #plain {
+    cursor: crosshair;
     width: 200px;
     height: 200px;
     aspect-ratio: 1;
